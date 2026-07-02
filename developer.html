@@ -5,34 +5,321 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tentang Developer - Pandi</title>
   <style>
-    :root { --primary: #1e3a5f; --accent: #c0392b; --bg: #f4f6f8; --text: #1a1a1a; }
+    :root { 
+      --primary: #1e3a5f; 
+      --accent: #c0392b; 
+      --bg: #f4f6f8; 
+      --text: #1a1a1a; 
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); display: flex; flex-direction: column; min-height: 100vh; }
-    header { background: var(--primary); color: #fff; padding: 1.5rem; text-align: center; }
-    header h1 { font-size: 2rem; }
-    .container { max-width: 800px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); flex: 1; }
-    .profile { text-align: center; margin-bottom: 2rem; }
-    .profile img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 4px solid var(--accent); margin-bottom: 1rem; }
-    .back-link { display: inline-block; margin-top: 2rem; color: var(--accent); text-decoration: none; font-weight: 600; }
-    .back-link:hover { text-decoration: underline; }
+    html {
+      scroll-behavior: smooth;
+    }
+    body { 
+      font-family: 'Segoe UI', system-ui, sans-serif; 
+      line-height: 1.6; 
+      color: var(--text); 
+      background: var(--bg); 
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh; 
+    }
+    
+    header { 
+      background: var(--primary); 
+      color: #fff; 
+      padding: 1.5rem; 
+      text-align: center; 
+    }
+    header h1 { 
+      font-size: 2rem; 
+    }
+    
+    .container { 
+      max-width: 800px; 
+      margin: 2rem auto; 
+      padding: 2rem; 
+      background: #fff; 
+      border-radius: 10px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+      flex: 1; 
+    }
+    
+    .profile { 
+      text-align: center; 
+      margin-bottom: 2rem; 
+    }
+    .profile img { 
+      width: 150px; 
+      height: 150px; 
+      border-radius: 50%; 
+      object-fit: cover; 
+      border: 4px solid var(--accent); 
+      margin-bottom: 1rem; 
+    }
+    .profile h2 {
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    .profile p {
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+    
+    .content-section {
+      margin-bottom: 2rem;
+    }
+    .content-section h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.8rem;
+    }
+    .content-section p {
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+    
+    .back-link { 
+      display: inline-block; 
+      margin-top: 2rem; 
+      color: var(--accent); 
+      text-decoration: none; 
+      font-weight: 600; 
+      transition: all 0.3s ease;
+    }
+    .back-link:hover { 
+      text-decoration: underline;
+      transform: translateX(-5px);
+    }
+
+    /* ===== NAVIGATION - GLASSMORPHISM HAMBURGER ===== */
+    .nav-container {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .hamburger-btn {
+      width: 50px;
+      height: 50px;
+      background: rgba(30, 58, 95, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .hamburger-btn:hover {
+      background: rgba(30, 58, 95, 0.9);
+      transform: scale(1.05);
+    }
+
+    .hamburger-btn.active {
+      background: rgba(192, 57, 43, 0.8);
+    }
+
+    .hamburger-btn .line {
+      width: 24px;
+      height: 3px;
+      background: #fff;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger-btn.active .line:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .hamburger-btn.active .line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger-btn.active .line:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .vertical-menu {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      background: rgba(30, 58, 95, 0.85);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+      min-width: 220px;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .menu-item {
+      display: block;
+      padding: 14px 24px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.3s ease;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: rgba(192, 57, 43, 0.6);
+      transition: width 0.3s ease;
+      z-index: 0;
+    }
+
+    .menu-item:hover::before {
+      width: 100%;
+    }
+
+    .menu-item:hover {
+      padding-left: 30px;
+      color: #fff;
+    }
+
+    .vertical-menu.active {
+      max-height: 400px;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .vertical-menu.active .menu-item {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .vertical-menu.active .menu-item:nth-child(1) { transition-delay: 0.05s; }
+    .vertical-menu.active .menu-item:nth-child(2) { transition-delay: 0.1s; }
+    .vertical-menu.active .menu-item:nth-child(3) { transition-delay: 0.15s; }
+    .vertical-menu.active .menu-item:nth-child(4) { transition-delay: 0.2s; }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        top: 15px;
+        left: 15px;
+      }
+      .hamburger-btn {
+        width: 45px;
+        height: 45px;
+      }
+      .vertical-menu {
+        min-width: 200px;
+      }
+      .container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      .profile img {
+        width: 120px;
+        height: 120px;
+      }
+    }
   </style>
 </head>
 <body>
+
+<!-- ===== NAVIGATION BAR ===== -->
+<div class="nav-container">
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+    <span class="line"></span>
+    <span class="line"></span>
+    <span class="line"></span>
+  </button>
+  
+  <div class="vertical-menu" id="verticalMenu">
+    <a href="index.html" class="menu-item">Beranda</a>
+    <a href="index.html#konsep" class="menu-item">Konsep</a>
+    <a href="index.html#teknis" class="menu-item">Teknis</a>
+    <a href="developer.html" class="menu-item">Developer</a>
+  </div>
+</div>
+<!-- ================================== -->
+
   <header>
     <h1>Tentang Developer</h1>
   </header>
+  
   <main class="container">
     <div class="profile">
-      <!-- Ganti URL gambar ini dengan foto Anda atau biarkan kosong jika belum ada -->
       <img src="images/Profile (Edited).webp" alt="Foto Developer">
       <h2>徐大力 Xu Dali</h2>
       <p>Mahasiswa & Pengembang Game Edukatif</p>
     </div>
-    <h3>Latar Belakang Proyek</h3>
-    <p>Proyek "Pandi" ini dikembangkan sebagai bagian dari eksplorasi media pembelajaran interaktif. Fokus utama pengembangan adalah menggabungkan mekanika permainan survival dengan retensi memori kognitif untuk mempelajari bahasa Mandarin.</p>
-    <h3>Kontak & Tautan</h3>
-    <p>Untuk pertanyaan akademis atau kolaborasi, Anda dapat menghubungi saya melalui institusi pendidikan terkait.</p>
+    
+    <div class="content-section">
+      <h3>Latar Belakang Proyek</h3>
+      <p>Proyek "Pandi" ini dikembangkan sebagai bagian dari eksplorasi media pembelajaran interaktif. Fokus utama pengembangan adalah menggabungkan mekanika permainan survival dengan retensi memori kognitif untuk mempelajari bahasa Mandarin.</p>
+      <p>Dengan pendekatan yang unik, permainan ini mengubah proses hafalan menjadi pengalaman yang menegangkan namun adiktif, di mana pemain harus membuat keputusan strategis antara menghafal untuk bertahan hidup atau mengorbankan ingatan untuk membantu karakter utama.</p>
+    </div>
+    
+    <div class="content-section">
+      <h3>Kontak & Tautan</h3>
+      <p>Untuk pertanyaan akademis atau kolaborasi, Anda dapat menghubungi saya melalui institusi pendidikan terkait.</p>
+    </div>
+    
     <a href="index.html" class="back-link">← Kembali ke Halaman Utama</a>
   </main>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const verticalMenu = document.getElementById('verticalMenu');
+
+  hamburgerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    hamburgerBtn.classList.toggle('active');
+    verticalMenu.classList.toggle('active');
+  });
+
+  // Tutup menu saat klik di luar
+  document.addEventListener('click', (e) => {
+    if (!hamburgerBtn.contains(e.target) && !verticalMenu.contains(e.target)) {
+      hamburgerBtn.classList.remove('active');
+      verticalMenu.classList.remove('active');
+    }
+  });
+
+  // Tutup menu saat link diklik
+  document.querySelectorAll('.menu-item').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburgerBtn.classList.remove('active');
+      verticalMenu.classList.remove('active');
+    });
+  });
+</script>
+<!-- ================================== -->
+
 </body>
 </html>
