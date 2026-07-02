@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pandi - Pandai Mandarin</title>
+  <meta name="description" content="Game edukatif interaktif untuk belajar bahasa Mandarin dengan pendekatan survival dan retensi memori.">
+  <style>
+    :root {
+      --primary: #1e3a5f;
+      --accent: #c0392b;
+      --bg: #f4f6f8;
+      --text: #1a1a1a;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); }
+    
+    .hero {
+      background: linear-gradient(135deg, var(--primary), #2d5a88);
+      color: #fff;
+      padding: 5rem 1rem 3rem;
+      text-align: center;
+    }
+    .hero h1 { font-size: 3.2rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+    .hero p { font-size: 1.25rem; opacity: 0.9; max-width: 650px; margin: 0 auto; }
+    .badge { display: inline-block; background: var(--accent); color: #fff; padding: 0.3rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+    .section { background: var(--card-bg); padding: 2rem; border-radius: 10px; box-shadow: var(--shadow); margin-bottom: 2rem; }
+    .section h2 { color: var(--primary); font-size: 1.6rem; margin-bottom: 1rem; border-left: 4px solid var(--accent); padding-left: 0.8rem; }
+    .section p { margin-bottom: 1rem; }
+    .section ul { padding-left: 1.2rem; margin-bottom: 1rem; }
+    .section li { margin-bottom: 0.5rem; }
+
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .tech-card { background: #eef2f5; padding: 1rem; border-radius: 8px; text-align: center; font-weight: 500; }
+    
+    .cta-box { background: #fff8e1; border-left: 4px solid #f39c12; padding: 1.5rem; margin-top: 1rem; border-radius: 6px; }
+    .cta-box strong { color: #b7791f; }
+
+    footer { text-align: center; padding: 2rem 1rem; color: #6b7280; font-size: 0.9rem; border-top: 1px solid #e5e7eb; margin-top: 2rem; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.4rem; }
+      .section { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <span class="badge">Proyek Akademik & Eksperimental</span>
+    <h1>Pandi</h1>
+    <p>Belajar Bahasa Mandarin dengan cara yang seru lewat game.</p>
+  </header>
+
+  <main class="container">
+    <section class="section">
+      <h2>Konsep Gameplay</h2>
+      <p>Pandi dirancang sebagai pengalaman <em>survival-adventure</em> edukatif. Berbeda dengan aplikasi hafalan konvensional, permainan ini mengubah penguasaan karakter Hanzi dan nada (tones) menjadi <strong>mata uang progresi</strong>. Pemain harus mengambil keputusan strategis: menghafal untuk bertahan, atau mengorbankan ingatan yang telah dikumpulkan untuk membantu karakter utama.</p>
+      <p>Sistem ini menciptakan tekanan positif dan ikatan emosional, yang secara kognitif terbukti meningkatkan retensi memori jangka panjang dibandingkan metode pengulangan pasif.</p>
+    </section>
+
+    <section class="section">
+      <h2>Nilai Edukasi & Inovasi</h2>
+      <ul>
+        <li><strong>Pembelajaran Kontekstual:</strong> Kosakata dan struktur kalimat dipelajari dalam skenario interaktif, bukan daftar terisolasi.</li>
+        <li><strong>Active Recall Terpaksa:</strong> Mekanisme "penggunaan = lupa" memaksa pemain secara aktif mengakses kembali ingatan, memperkuat jalur saraf memori.</li>
+        <li><strong>Umpan Balik Emosional:</strong> Ketergantungan karakter utama pada keputusan pemain membangun motivasi intrinsik dan mengurangi kejenuhan belajar.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Arsitektur Teknis</h2>
+      <p>Proyek ini dibangun dengan prinsip modular dan aksesibilitas lintas perangkat:</p>
+      <div class="tech-grid">
+        <div class="tech-card">Godot Engine<br><small>HTML5 Export</small></div>
+        <div class="tech-card">Frontend Web<br><small>HTML5 / CSS3 / JS</small></div>
+        <div class="tech-card">Penyimpanan<br><small>LocalStorage / Firebase</small></div>
+        <div class="tech-card">Deployment<br><small>Vercel / Netlify (Gratis)</small></div>
+      </div>
+      <div class="cta-box">
+        <strong>Status Pengembangan:</strong> Mesin permainan sedang dalam tahap produksi di Godot. Halaman ini berfungsi sebagai prototipe web dan dokumentasi konsep untuk presentasi akademik. Versi permainan interaktif akan diintegrasikan secara bertahap.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2026 Pandi Project. Dibuat untuk keperluan eksplorasi akademik dan pengembangan media pembelajaran interaktif.
+  </footer>
+
+</body>
+</html>
